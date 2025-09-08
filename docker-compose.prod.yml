@@ -1,0 +1,10 @@
+services:
+  node-app:
+    build:
+      context: .
+      target: production  
+      #that indicates to use the production stage to build the image.
+    environment:
+      - NODE_ENV=production
+    command: npm start 
+    #this will overwrite the default command on the docker file.

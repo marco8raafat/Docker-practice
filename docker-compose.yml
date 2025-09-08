@@ -1,0 +1,46 @@
+services:
+  node-app:
+    container_name: express-node-app-container
+    ports:
+      - "4000:4000"
+    env_file:
+      - .env
+    depends_on:
+      - mongo
+      #this will make sure that the mongo service is started before the node-app service
+  mongo:
+    # each service will be in a separate container
+    image: mongo
+    # build the container from mongo image
+    restart: always
+    # restart the container automatically if it crashes
+    volumes:
+      - mongo-db:/data/db
+      #instead of saving data in data/db it will be saved in the named volume mongo-db to prevent deleting data each time I stop the container
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: example
+  
+  mongo-express:
+    image: mongo-express
+    restart: always
+    ports:
+      - 8081:8081
+    environment:
+      ME_CONFIG_MONGODB_URL: mongodb://root:example@mongo:27017/
+      ME_CONFIG_BASICAUTH_ENABLED: true
+      ME_CONFIG_BASICAUTH_USERNAME: root
+      ME_CONFIG_BASICAUTH_PASSWORD: example
+    depends_on:
+      - mongo
+
+  nginx:
+    image: nginx:stable-alpine
+    ports:
+     - "80:80"
+    volumes:
+      - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
+    depends_on:
+      - node-app
+volumes:
+  mongo-db:

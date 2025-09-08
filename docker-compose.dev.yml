@@ -1,0 +1,12 @@
+services:
+  node-app:
+    build:
+      context: .
+      target: development  
+      #that indicates to use the development stage to build the image.
+    volumes:
+      - .:/app
+    environment:
+      - NODE_ENV=development
+    command: npm run start-dev 
+    #this will overwrite the default command on the docker file.
