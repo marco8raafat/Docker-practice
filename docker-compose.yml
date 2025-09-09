@@ -1,6 +1,7 @@
 services:
   node-app:
     container_name: express-node-app-container
+    image: marco8raafat/docker-practice
     ports:
       - "4000:4000"
     env_file:
