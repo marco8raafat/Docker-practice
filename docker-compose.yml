@@ -2,6 +2,7 @@ services:
   node-app:
     container_name: express-node-app-container
     image: marco8raafat/docker-practice
+    # after build, tag the image with this name. (this name must be the same as the name in dockerhub repo to push the image to dockerhub)
     ports:
       - "4000:4000"
     env_file:
