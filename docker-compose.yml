@@ -1,15 +1,30 @@
 services:
   node-app:
-    container_name: express-node-app-container
+    # container_name: express-node-app-container 
+    # remove this above line to avoid conflict when running multiple containers from the same image
     image: islamahmed94/tresmerge-docker
     # after build, tag the image with this name. (this name must be the same as the name in dockerhub repo to push the image to dockerhub)
-    ports:
-      - "4000:4000"
+    # ports:
+    #   - "4000:4000"
+    # also remove port forwarding in production as nginx will handle it and it will cause conflict when running multiple containers from the same image
     env_file:
       - .env
     depends_on:
       - mongo
       #this will make sure that the mongo service is started before the node-app service
+    deploy:
+      replicas: 4
+      # number of containers to run from this image
+      update_config:
+        parallelism: 2
+        # update 2 containers at a time then a wait for the delay time before updating the next 2 containers
+        delay: 10s
+        # wait for 10 seconds before updating the next set of containers
+      restart_policy:
+        condition: on-failure
+        # restart the container if it fails
+        delay: 5s
+        # wait for 5 seconds before restarting the container
   mongo:
     # each service will be in a separate container
     image: mongo
