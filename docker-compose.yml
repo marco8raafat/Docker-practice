@@ -2,7 +2,7 @@ services:
   node-app:
     # container_name: express-node-app-container 
     # remove this above line to avoid conflict when running multiple containers from the same image
-    image: islamahmed94/tresmerge-docker
+    image: marco8raafat/docker-practice
     # after build, tag the image with this name. (this name must be the same as the name in dockerhub repo to push the image to dockerhub)
     # ports:
     #   - "4000:4000"
@@ -37,6 +37,11 @@ services:
     environment:
       MONGO_INITDB_ROOT_USERNAME: root
       MONGO_INITDB_ROOT_PASSWORD: example
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+        delay: 5s
   
   # mongo-express:
   #   image: mongo-express

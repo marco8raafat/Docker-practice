@@ -1,4 +1,5 @@
-FROM node:22 as base
+FROM node:22-alpine as base
+RUN apk add --no-cache bash
 #base stage
 
 
