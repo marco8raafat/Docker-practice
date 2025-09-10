@@ -1,0 +1,8 @@
+https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-on-ubuntu-20-04
+link to install docker in ubuntu server
+
+https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-compose-on-ubuntu-20-04
+to install docker-compose on obuntu server
+
+https://docs.docker.com/engine/install/linux-postinstall/
+if Failed to execute script docker-compose then make a docker group and add your user to it 
