@@ -293,17 +293,7 @@ sequenceDiagram
   Nginx-->>User: Final Response
 ```
 
----
 
-## Best Practices & Security
-
-- **Never commit secrets**: `.env` is in `.gitignore` for privacy.
-- **No local dependencies in container**: `.dockerignore` blocks `/node_modules`.
-- **Use environment variables**: Safely inject credentials and configuration.
-- **Volume for MongoDB**: Ensures persistent storage.
-- **Nginx in front**: Protects the Node.js app, provides load balancing, and hides app internals.
-
----
 
 ## Quick Reference
 
